@@ -4,11 +4,7 @@ mongoose
   .connect(
     "mongodb+srv://" +
       process.env.DB_USER_PASS +
-      "@cluster0.kext1xd.mongodb.net/mern-porject",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
+      "@cluster0.kext1xd.mongodb.net/mern-porject"
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Failed to connect to MongoDB", err));

@@ -4,10 +4,10 @@ const UserModel = require("../models/user.model");
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      if (err) {
+    jwt.verify(token, process.env.TOKEN_SECRET, async (error, decodedToken) => {
+      if (error) {
         res.locals.user = null;
-        res.cookie("jwt", "", { maxAge: 1 });
+        // res.cookie("jwt", "", { maxAge: 1 });
         next();
       } else {
         let user = await UserModel.findById(decodedToken.id);
@@ -26,7 +26,8 @@ module.exports.requireAuth = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
-        console.log(err);
+        console.log(error);
+        res.send(200).json("no token");
       } else {
         console.log(decodedToken.id);
         next();

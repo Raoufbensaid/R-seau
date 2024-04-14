@@ -19,7 +19,7 @@ const App = () => {
         .then((res) => {
           setUid(res.data);
         })
-        .catch((error) => console.log("No token"));
+        .catch((error) => console.log("Error fetching JWT ID:", error));
     };
     fetchToken();
 

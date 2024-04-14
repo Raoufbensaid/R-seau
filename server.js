@@ -11,6 +11,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
+  // origin: "http://172.20.10.13:3000",
   origin: process.env.CLIENT_URL,
   credentials: true,
   allowedHeaders: ["sessionId", "Content-Type"],
@@ -39,3 +40,8 @@ app.use("/api/post", postRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
 });
+
+// Serveur écoutant sur toutes les interfaces réseau
+// app.listen(process.env.PORT, "0.0.0.0", () => {
+//   console.log(`Server is running on port ${process.env.PORT}`);
+// });

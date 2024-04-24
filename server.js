@@ -11,7 +11,6 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  // origin: "http://172.20.10.13:3000",
   origin: process.env.CLIENT_URL,
   credentials: true,
   allowedHeaders: ["sessionId", "Content-Type"],

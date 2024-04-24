@@ -1,4 +1,4 @@
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
@@ -50,11 +50,25 @@ export const followUser = (followerId, idToFollow) => {
   return (dispatch) => {
     return axios({
       method: "patch",
-      url: `${process.env.REACT_APP_API_URL}api/user/follow` + followerId,
+      url: `${process.env.REACT_APP_API_URL}api/user/follow/` + followerId,
       data: { idToFollow },
     })
       .then((res) => {
         dispatch({ type: FOLLOW_USER, payload: { idToFollow } });
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
+export const unfollowUser = (followerId, idToUnfollow) => {
+  return (dispatch) => {
+    return axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}api/user/unfollow/` + followerId,
+      data: { idToUnfollow },
+    })
+      .then((res) => {
+        dispatch({ type: UNFOLLOW_USER, payload: { idToUnfollow } });
       })
       .catch((error) => console.log(error));
   };

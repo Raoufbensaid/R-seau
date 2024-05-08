@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import LeftNav from "../LeftNav";
 import { useSelector, useDispatch } from "react-redux";
 import UploadImg from "./UploadImg";
 import FollowHandler from "./FollowHandler";
@@ -11,6 +10,7 @@ const UpdateProfil = () => {
   const [updateForm, setUpdateForm] = useState(false);
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
+  const error = useSelector((state) => state.errorReducer.userError);
   const dispatch = useDispatch();
   const [followingPopup, setFollowingPopup] = useState(false);
   const [followersPopup, setFollowersPopup] = useState(false);
@@ -26,13 +26,14 @@ const UpdateProfil = () => {
 
   return (
     <div className="profil-container">
-      <LeftNav />
       <h1> Profil de {userData.pseudo}</h1>
       <div className="update-container">
         <div className="left-part">
           <h3>Photo de profil</h3>
           <img src={imgPath} alt="user-pic" />
           <UploadImg />
+          <p>{error.maxSize}</p>
+          <p>{error.format}</p>
         </div>
         <div className="right-part">
           <div className="bio-update">
@@ -78,7 +79,10 @@ const UpdateProfil = () => {
                   if (user._id === userData.following[i]) {
                     return (
                       <li key={user._id}>
-                        <img src={user.picture} alt="user-pic" />
+                        <img
+                          src={user.picture.replace("/client/public", "")}
+                          alt="user-pic"
+                        />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
                           <FollowHandler
@@ -109,7 +113,10 @@ const UpdateProfil = () => {
                   if (user._id === userData.followers[i]) {
                     return (
                       <li key={user._id}>
-                        <img src={user.picture} alt="user-pic" />
+                        <img
+                          src={user.picture.replace("/client/public", "")}
+                          alt="user-pic"
+                        />
                         <h4>{user.pseudo}</h4>
                         <div className="follow-handler">
                           <FollowHandler

@@ -12,7 +12,6 @@ const LeftNav = () => {
           >
             <img src="./img/icons/home.svg" alt="home" />
           </NavLink>
-          <br />
 
           <NavLink
             to="/trending"
@@ -20,7 +19,6 @@ const LeftNav = () => {
           >
             <img src="./img/icons/rocket.svg" alt="trending" />
           </NavLink>
-          <br />
 
           <NavLink
             to="/profil"
@@ -28,7 +26,6 @@ const LeftNav = () => {
           >
             <img src="./img/icons/user.svg" alt="profil" />
           </NavLink>
-          <br />
         </div>
       </div>
     </div>

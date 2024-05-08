@@ -4,10 +4,8 @@
   .icons {
     position: fixed;
     z-index: 10;
-
-    @media screen and (max-width: 590px) {
-      margin: 2px 0 0 -9px;
-    }
+    left: 5%;
+    top: 110px;
 
     .icons-bis {
       position: absolute;

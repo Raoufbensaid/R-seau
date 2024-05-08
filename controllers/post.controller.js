@@ -15,8 +15,10 @@ module.exports.readPost = async (req, res) => {
 };
 
 module.exports.createPost = async (req, res) => {
-  let fileName;
-  if (req.file !== null) {
+  let fileName = ""; // Initialiser fileName avec une chaîne vide par défaut
+
+  // Vérifier si un fichier est envoyé avec le post
+  if (req.file) {
     try {
       // Vérification du format de l'image
       if (
@@ -28,27 +30,27 @@ module.exports.createPost = async (req, res) => {
       // Vérification de la taille du fichier
       if (req.file.size > 500000) {
         // Taille en octets
-        throw Error("max size");
+        throw new Error("max size");
       }
+
+      fileName = req.body.posterId + Date.now() + ".jpg";
+      // Chemin et nom du fichier de destination
+      const targetPath = `./client/public/uploads/posts/${fileName}`;
+      const tempPath = req.file.path;
+
+      // Utiliser sharp pour convertir l'image au format jpg
+      await sharp(tempPath).toFormat("jpeg").toFile(targetPath);
     } catch (error) {
       const errors = uploadErrors(error);
-      return res.status(201).json({ errors });
+      return res.status(400).json({ errors });
     }
-
-    fileName = req.body.posterId + Date.now() + ".jpg";
-    // Chemin et nom du fichier de destination
-    const targetPath = `./client/public/uploads/posts/${fileName}.jpg`;
-    const tempPath = req.file.path;
-
-    // Utiliser sharp pour convertir l'image au format jpg
-    await sharp(tempPath).toFormat("jpeg").toFile(targetPath);
   }
 
+  // Créer un nouvel objet post avec ou sans fichier selon le cas
   const newPost = new postModel({
     posterId: req.body.posterId,
     message: req.body.message,
-    picture:
-      req.file !== null ? "./client/public/uploads/posts/" + fileName : "",
+    picture: fileName ? "./client/public/uploads/posts/" + fileName : "",
     video: req.body.video,
     likers: [],
     comments: [],

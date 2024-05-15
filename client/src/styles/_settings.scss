@@ -15,13 +15,14 @@ $font-1: "font-1", sans-serif;
 $font-2: "font-2", serif;
 $font-3: "font-3", serif;
 
-$color-1: #6a4c93;
-$color-2: #a0c4ff;
-$color-3: #1d3557;
-$color-4: #f1faee;
-$black: #333333;
-$white: #ffffff;
-$shadow: #bcc0c7;
+/* Mise à jour de la palette de couleurs avec un fond gris doux pour une meilleure visibilité */
+$color-1: #467f9f; /* Bleu Twitter */
+$color-2: #b1bcc5; /* Bleu-gris */
+$color-3: black; /* Gris clair */
+$color-4: #e1e8ed; /* Gris doux pour le fond */
+$black: #14171a; /* Presque noir pour le texte */
+$white: #ffffff; /* Blanc pour les contrastes élevés */
+$shadow: #bcc0c7; /* Ombre légère pour la profondeur */
 
 * {
   margin: 0;
